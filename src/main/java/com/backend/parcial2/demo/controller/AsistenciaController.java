@@ -34,4 +34,14 @@ public class AsistenciaController {
         String carnet = payload.get("carnet");
         return ResultResponseMapper.toResponse(asistenciaService.registrarAsistencia(carnet));
     }
+
+    @GetMapping("/reporte/diario")
+    public ResponseEntity<?> getReporteDiario() {
+        return ResultResponseMapper.toResponse(asistenciaService.obtenerReporteDiario());
+    }
+
+    @GetMapping("/reporte/mensual")
+    public ResponseEntity<?> getReporteMensual() {
+        return ResultResponseMapper.toResponse(asistenciaService.obtenerReporteMensual());
+    }
 }

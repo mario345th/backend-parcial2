@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/empleados")
-//@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET})
 @CrossOrigin(originPatterns = "*", methods = {RequestMethod.POST, RequestMethod.GET})
 public class EmpleadoController {
 

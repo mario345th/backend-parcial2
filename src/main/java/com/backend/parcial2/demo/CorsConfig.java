@@ -14,7 +14,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // Aplica para TODOS los endpoints del sistema
-                       // .allowedOrigins("http://localhost:5173") // Tu puerto de React
+                        // .allowedOrigins("http://localhost:5173") // Tu puerto de React
                         .allowedOriginPatterns("*")
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // Métodos permitidos
                         .allowedHeaders("*") // Permitir todas las cabeceras
