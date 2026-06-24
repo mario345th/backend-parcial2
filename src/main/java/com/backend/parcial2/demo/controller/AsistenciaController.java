@@ -9,7 +9,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/asistencias")
-@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET})
+@CrossOrigin(originPatterns = "*", methods = {RequestMethod.POST, RequestMethod.GET})
 public class AsistenciaController {
 
     private final AsistenciaService asistenciaService;
