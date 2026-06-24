@@ -14,7 +14,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const password = document.getElementById("password").value;
 
         try {
-            const response = await fetch("http://localhost:8080/api/administradores/login", {
+            // URL ACTUALIZADA A RENDER
+            const response = await fetch("https://backend-parcial2.onrender.com/api/administradores/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ usuario, password })
@@ -32,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         } catch (error) {
             console.error("Error al conectar con el backend:", error);
-            alert("Error de conexión con el servidor.");
+            alert("Error de conexión con el servidor. Recuerda que la nube gratuita puede tardar unos segundos en despertar.");
         }
     });
 });

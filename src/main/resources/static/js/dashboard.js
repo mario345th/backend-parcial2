@@ -21,7 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // 4. Cargar Empleados (Tabla y Marcadores)
     async function cargarEmpleados() {
         try {
-            const response = await fetch("http://localhost:8080/api/empleados");
+            // URL ACTUALIZADA A RENDER
+            const response = await fetch("https://backend-parcial2.onrender.com/api/empleados");
             const data = await response.json();
 
             const empleados = data.value || data;
@@ -84,40 +85,40 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // 6. Cargar Reporte Dinámico (Diario o Mensual)
-    // 6. Cargar Reporte Dinámico (Diario o Mensual)
-        async function cargarReporte(tipoFiltro) {
-            try {
-                const response = await fetch(`http://localhost:8080/api/asistencias/reporte/${tipoFiltro}`);
-                const data = await response.json();
+    async function cargarReporte(tipoFiltro) {
+        try {
+            // URL ACTUALIZADA A RENDER
+            const response = await fetch(`https://backend-parcial2.onrender.com/api/asistencias/reporte/${tipoFiltro}`);
+            const data = await response.json();
 
-                const reportes = data.value || data;
-                const tbody = document.querySelector("#tablaReportes tbody");
-                tbody.innerHTML = "";
+            const reportes = data.value || data;
+            const tbody = document.querySelector("#tablaReportes tbody");
+            tbody.innerHTML = "";
 
-                if (!reportes || reportes.length === 0 || data.success === false) {
-                    // Actualizado para abarcar 5 columnas (colspan="5")
-                    tbody.innerHTML = `<tr><td colspan="5" class="text-center text-muted">No hay datos para este período</td></tr>`;
-                    return;
-                }
-
-                reportes.forEach(rep => {
-                    // Dibujamos las 5 columnas, incluyendo rep.horaEntrada y rep.horaSalida
-                    tbody.innerHTML += `
-                        <tr>
-                            <td>${rep.carnet}</td>
-                            <td>${rep.periodo}</td>
-                            <td><span class="badge bg-secondary">${rep.horaEntrada}</span></td>
-                            <td><span class="badge bg-secondary">${rep.horaSalida}</span></td>
-                            <td><strong>${rep.horasTrabajadas} hrs</strong></td>
-                        </tr>
-                    `;
-                });
-            } catch (error) {
-                console.error(`Error cargando el reporte ${tipoFiltro}:`, error);
-                document.querySelector("#tablaReportes tbody").innerHTML =
-                    `<tr><td colspan="5" class="text-center text-danger">Error al conectar con el servidor</td></tr>`;
+            if (!reportes || reportes.length === 0 || data.success === false) {
+                // Actualizado para abarcar 5 columnas (colspan="5")
+                tbody.innerHTML = `<tr><td colspan="5" class="text-center text-muted">No hay datos para este período</td></tr>`;
+                return;
             }
+
+            reportes.forEach(rep => {
+                // Dibujamos las 5 columnas, incluyendo rep.horaEntrada y rep.horaSalida
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${rep.carnet}</td>
+                        <td>${rep.periodo}</td>
+                        <td><span class="badge bg-secondary">${rep.horaEntrada}</span></td>
+                        <td><span class="badge bg-secondary">${rep.horaSalida}</span></td>
+                        <td><strong>${rep.horasTrabajadas} hrs</strong></td>
+                    </tr>
+                `;
+            });
+        } catch (error) {
+            console.error(`Error cargando el reporte ${tipoFiltro}:`, error);
+            document.querySelector("#tablaReportes tbody").innerHTML =
+                `<tr><td colspan="5" class="text-center text-danger">Error al conectar con el servidor</td></tr>`;
         }
+    }
 
     // Escuchar el cambio en el select del Reporte
     const filtroReporte = document.getElementById("filtroReporte");
@@ -157,7 +158,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Función principal que trae los datos de Spring Boot
     async function cargarAsistencias() {
         try {
-            const response = await fetch("http://localhost:8080/api/asistencias");
+            // URL ACTUALIZADA A RENDER
+            const response = await fetch("https://backend-parcial2.onrender.com/api/asistencias");
             const data = await response.json();
 
             historialCompleto = data.value || data;
