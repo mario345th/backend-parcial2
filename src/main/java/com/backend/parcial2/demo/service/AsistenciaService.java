@@ -3,6 +3,7 @@ package com.backend.parcial2.demo.service;
 import com.backend.parcial2.demo.GenericServiceImpl;
 import com.backend.parcial2.demo.LogicError;
 import com.backend.parcial2.demo.Result;
+import com.backend.parcial2.demo.dto.ReporteHorasDTO;
 import com.backend.parcial2.demo.entities.Asistencia;
 import com.backend.parcial2.demo.entities.Empleado;
 import com.backend.parcial2.demo.persistence.AsistenciaRepository;
@@ -45,5 +46,21 @@ public class AsistenciaService extends GenericServiceImpl<Asistencia> {
             return Result.failure(LogicError.NOT_FOUND, Asistencia.class);
         }
         return Result.success(asistencias);
+    }
+    public Result<List<ReporteHorasDTO>> obtenerReporteDiario() {
+        List<ReporteHorasDTO> reporte = asistenciaRepository.obtenerHorasTrabajadasPorDia();
+        if (reporte.isEmpty()) {
+            // Puedes crear un nuevo LogicError si lo deseas, o usar NOT_FOUND
+            return Result.failure(LogicError.NOT_FOUND, ReporteHorasDTO.class);
+        }
+        return Result.success(reporte);
+    }
+
+    public Result<List<ReporteHorasDTO>> obtenerReporteMensual() {
+        List<ReporteHorasDTO> reporte = asistenciaRepository.obtenerHorasTrabajadasPorMes();
+        if (reporte.isEmpty()) {
+            return Result.failure(LogicError.NOT_FOUND, ReporteHorasDTO.class);
+        }
+        return Result.success(reporte);
     }
 }

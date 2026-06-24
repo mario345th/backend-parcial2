@@ -9,7 +9,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/asistencias")
-@CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET})
+@CrossOrigin(originPatterns = "*", methods = {RequestMethod.POST, RequestMethod.GET})
 public class AsistenciaController {
 
     private final AsistenciaService asistenciaService;
@@ -33,5 +33,15 @@ public class AsistenciaController {
     public ResponseEntity<?> registrarAsistenciaQR(@RequestBody Map<String, String> payload) {
         String carnet = payload.get("carnet");
         return ResultResponseMapper.toResponse(asistenciaService.registrarAsistencia(carnet));
+    }
+
+    @GetMapping("/reporte/diario")
+    public ResponseEntity<?> getReporteDiario() {
+        return ResultResponseMapper.toResponse(asistenciaService.obtenerReporteDiario());
+    }
+
+    @GetMapping("/reporte/mensual")
+    public ResponseEntity<?> getReporteMensual() {
+        return ResultResponseMapper.toResponse(asistenciaService.obtenerReporteMensual());
     }
 }
